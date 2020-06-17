@@ -1,8 +1,8 @@
 package covid;
 
-import javax.persistence.*;
 import org.springframework.beans.BeanUtils;
-import java.util.List;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name="Delivery_table")
@@ -21,7 +21,15 @@ public class Delivery {
         Delivered delivered = new Delivered();
         BeanUtils.copyProperties(this, delivered);
         delivered.publishAfterCommit();
+    }
 
+    public Delivery(KitChecked kitChecked){
+        this.type = kitChecked.getType();
+        this.qty = kitChecked.getQty();
+        this.status = "KIT REQUEST";
+    }
+
+    public Delivery(){
 
     }
 
